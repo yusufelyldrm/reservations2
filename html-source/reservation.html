@@ -21,74 +21,95 @@
       }
     </style>
 
-
-
   </head>
   <body>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
    
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.html ">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="about.html">About</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="fa">
-            Rooms
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="generals.html">General' Quarters</a></li>
-            <li><a class="dropdown-item" href="majors.html">Major's Suit</a></li>
-          
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html ">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="fa">
+                Rooms
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="generals.html">General' Quarters</a></li>
+                <li><a class="dropdown-item" href="majors.html">Major's Suit</a></li>
+              
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reservation.html" tabindex="-1" aria-disabled="true" >Book now </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html" tabindex="-1" aria-disabled="true" >Contact </a>
+            </li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="reservation.html" tabindex="-1" aria-disabled="true" >Book now </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="contact.html" tabindex="-1" aria-disabled="true" >Contact </a>
-        </li>
-      </ul>
-     
-    </div>
-  </div>
-</nav>
-
-
-  <div class="container">
-
-  <h1>This will be a contact page </h1>
-    </div>
-
-    <div class="row">
-      <div class="col">
-       
+         
+        </div>
       </div>
-    </div>
+    </nav>
 
   
-  </div>
-    <div class="row my-footer">
-      <div class="col">
-        Left
+    <div class="container">
+
+
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+
+            <h1 class="mt 5">Search for availability</h1>
+
+            <form action="reservation.html" method="get">
+
+            <div class="form-row">
+
+              <div class="col">
+                <div class="mb-3">
+                  <label for="start-date>" class="form-label">Starting Date</label>
+                  <input required type="date" class="form-control" id="start-date" name="start-date" aria-describedby="startDateHelp">
+                  <small id="startDateHelp" class="form-text text-muted">Enter your starting date in the form of DD.MM.YYYY.</small>
+                </div>
+              </div>
+              
+              <div class="col">
+                <div class="mb-3">
+                  <label for="end-date>" class="form-label">Ending Date</label>
+                  <input required type="date" class="form-control" id="end-date" name="end-date" aria-describedby="endDateHelp">
+                  <small id="endDateHelp" class="form-text text-muted">Enter your ending date in the form of DD.MM.YYYY.</small>
+                </div>
+              </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Search Availability</button> 
+
+          </form>
+
+        </div>
       </div>
-      <div class="col">
-        Middle
-      </div>
-      <div class="col">
-        Right
-      </div>
+
+
     </div>
 
- </body>
+
+   <div class="row my-footer">
+      <div class="col">Left</div>
+      <div class="col">Middle</div>
+      <div class="col">Right</div>
+  </div>
+
+  </body>
 </html>
