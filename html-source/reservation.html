@@ -150,8 +150,7 @@
 
     <script>
 
-
-      console.log("ım printing from java script");
+      let attention = Prompt();
 
       (()=>{
         'use strict'
@@ -176,8 +175,8 @@
 
       
       document.getElementById("colorButton").addEventListener("click" , function(){     
-      
-        notifyModal("dlkasd", "kald" ,"success"," dasdsa");
+
+      attention.error({msg: "error"});
 
       })
 
@@ -194,9 +193,72 @@
           text: text,
           icon: icon,
           confirmButtonText: confirmButtonText
-
         })
+      }
 
+      function Prompt(){
+        
+        let toast = function(c){
+          const {
+            msg = "",
+            icon ="success",
+            position = "top-end",
+          } = c;
+
+          const Toast = Swal.mixin({
+            toast: true,
+            title:msg,
+            position: position,
+            icon : icon,
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+
+          Toast.fire({})
+        }
+
+        let success = function(c) {
+          const {
+            title = "",
+            footer = "",
+            msg ="",
+            
+
+          } = c;
+          Swal.fire({
+            icon : "success",
+            title: title,
+            footer : footer,
+            text : msg,
+          })
+        }
+
+        let error = function(c) {
+          const {
+            title = "",
+            footer = "",
+            msg ="",
+            
+
+          } = c;
+          Swal.fire({
+            icon : "error",
+            title: title,
+            footer : footer,
+            text : msg,
+          })
+        }
+
+        return{
+          toast:toast,
+          success:success,
+          error:error,
+        }
       }
 
 
