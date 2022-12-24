@@ -6,31 +6,7 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
-
-
-
-
-    <style>
-    
-      .my-footer{
-
-        padding: 1em;
-        height: 5em;
-        background-color: black;
-        margin-top: 1.5em;
-        color: white;
-        font-size: 80%;
-      }
-      .room-image{
-        max-width: 50%;
-      }
- 
-    .notie-container {
-      box-shadow: none;
-    }
-
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="static/css/styles.css">
 
 
 
@@ -143,7 +119,6 @@
       <div class="col">Right</div>
     </div>
 
- 
     
 
     
@@ -176,7 +151,25 @@
       
       document.getElementById("colorButton").addEventListener("click" , function(){     
 
-      attention.error({msg: "error"});
+        let html = `
+        <form id="check-availability" action = "" method= "post" novalidate class="needs-validation">
+          <div class="form-row">  
+            <div class="col">
+              <div class="form-row" id="reservaiton-dates-modal">
+                <div class="col">
+                  <input required class="form-control" type="date" name="start" id="start" placeholder="Arrival" />
+                </div>
+                <div class="col">
+                  <input required class="form-control" type="date" name="end" id="end" placeholder="Departure" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        `
+        
+
+        attention.custom({msg: html , title: "Choose your dates "});
 
       })
 
@@ -196,6 +189,7 @@
         })
       }
 
+      //Prompt is our JavaScript module for all alerts , notifications and custom popup dialogs.
       function Prompt(){
         
         let toast = function(c){
@@ -258,16 +252,40 @@
           toast:toast,
           success:success,
           error:error,
+          custom:custom,
+        }
+      }
+
+      async function custom(c){
+        const {
+          msg = "",
+          title = "",           
+        } =c;
+
+        const { value: formValues } = await Swal.fire({
+          title: title,
+          html: msg,
+          focusConfirm: false,
+          backDrop:false,
+          showCancelButton : true, 
+         
+          preConfirm: () => {
+
+            return [
+              document.getElementById('start').value,
+              document.getElementById('end').value
+            ]
+          } 
+        })
+
+        if (formValues) {
+           Swal.fire(JSON.stringify(formValues))
         }
       }
 
 
 
     </script>
-
-  
-
-  
 
    
   </body>
