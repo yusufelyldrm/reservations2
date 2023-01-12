@@ -30,7 +30,6 @@ func NewHandlers(r *Repository) {
 
 // Home func is the home page handler
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-
 	remoteIp := r.RemoteAddr
 	m.App.Session.Put(r.Context(), "remote_ip", remoteIp)
 
@@ -53,7 +52,7 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-// Reservaiton renders the make a reservation page and displays from
+// Reservation renders the make a reservation page and displays from
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "make-reservation.page.tmpl", &models.TemplateData{})
 }
@@ -70,5 +69,10 @@ func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
 
 // Availability renders the search availability page
 func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "search-availability.tmpl", &models.TemplateData{})
+	render.RenderTemplate(w, "search-availability.page.tmpl", &models.TemplateData{})
+}
+
+// Contact renders the contact page
+func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "contact.page.tmpl", &models.TemplateData{})
 }

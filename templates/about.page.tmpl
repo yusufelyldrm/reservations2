@@ -5,17 +5,11 @@
         <div class="row">
             <div class="col">
                 <h1>This is about page</h1>
-                <p>this is some text</p>
-                <p>this came from template : {{index .StringMap "test" }}</p>
-
-                <p>
-                    {{if ne (index .StringMap "remote_ip") ""}}
-                        Your remote IP adress is {{index .StringMap "remote_ip"}}
-                    {{else}}
-                        I dont know your remote IP adress yet. Visit the <a href="/">Home Page </a> so ı can get it.
-                    {{end}}
-                </p>
+                
+                
             </div>
+
         </div>
     </div>
+    
 {{end}}
