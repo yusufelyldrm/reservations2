@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -99,6 +100,36 @@ func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 	}
 
+}
+
+type jsonResponse struct {
+	OK      bool   `json:"ok"`
+	Message string `json:"message"`
+}
+
+// AvailabilityJSON handles request for availability and send JSON response
+func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
+
+	resp := jsonResponse{
+		OK:      false,
+		Message: "Available!",
+	}
+	// convert the response to JSON
+	out, err := json.MarshalIndent(resp, "", "     ")
+
+	// if there is an error , log it and return an internal server error
+	if err != nil {
+		log.Println(err)
+	}
+
+	log.Println(
+		string(out),
+	)
+	// set the content type to JSON
+	w.Header().Set("Content-Type", "application/json")
+
+	// write the JSON response
+	w.Write(out)
 }
 
 // Contact renders the contact page
