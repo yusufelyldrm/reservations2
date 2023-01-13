@@ -49,13 +49,13 @@
       </div>
     </nav>
 
-        {{block "css" .}}
+      {{block "css" .}}
 
-        {{end}}
+      {{end}}
           
-        {{block "content" .}}
+      {{block "content" .}}
   
-        {{end}}
+      {{end}}
 
     </head>
     <body>
@@ -82,57 +82,50 @@
 
 
 
+ <script>
 
-    <script>
+      // let attention = Prompt();
 
+      // (()=>{
+      //   'use strict'
+
+      //   // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      //   const forms = document.querySelectorAll('.needs-validation')
+
+      //   // Loop over them and prevent submission
+      //   Array.from(forms).forEach(form => {
+      //     form.addEventListener('submit', event => {
+      //       if (!form.checkValidity()) {
+      //         event.preventDefault();
+      //         event.stopPropagation();
+      //       }
+
+      //       form.classList.add('was-validated');
+      //     }, false);
+      //   });
+      //   }
+      // )();
       let attention = Prompt();
 
-      (()=>{
-        'use strict'
-
+(function () {
+    'use strict';
+    window.addEventListener('load', function () {
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.needs-validation')
-
+        let forms = document.getElementsByClassName('needs-validation');
         // Loop over them and prevent submission
-        Array.from(forms).forEach(form => {
-          form.addEventListener('submit', event => {
-            if (!form.checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-
-            form.classList.add('was-validated');
-          }, false);
+        Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
         });
-        }
-      )();
+    }, false);
+})();
 
 
-      
-      document.getElementById("colorButton").addEventListener("click" , function(){     
-
-        let html = `
-
-        <form id="check-availability" action = "" method= "post" novalidate class="needs-validation">
-          <div class="form-row">  
-            <div class="col">
-              <div class="form-row" id="reservaiton-dates-modal">
-                <div class="col">
-                  <input required class="form-control" type="date" name="start" id="start" placeholder="Arrival" />
-                </div>
-                <div class="col">
-                  <input required class="form-control" type="date" name="end" id="end" placeholder="Departure" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-        `
-        
-
-        attention.custom({msg: html , title: "Choose your dates "});
-
-      })
 
       function notify(msg , msgType){
           notie.alert({
@@ -244,7 +237,7 @@
         }
       }
 
-    </script>   
+    </script> 
   </body>
 </html>
 

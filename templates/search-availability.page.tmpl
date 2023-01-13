@@ -4,39 +4,31 @@
 <div class="container">
 
 
-      <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <h1 class="mt 5">Search for availability</h1>
 
-            <h1 class="mt 5">Search for availability</h1>
-
-          <form action="reservation.html" method="get" novalidate class="needs-validation" >
-
-            <div class="form-row">
-
-              <div class="col">
-                <div class="mb-3">
-                  <label for="start-date>" class="form-label">Starting Date</label>
-                  <input required type="date" class="form-control" id="start-date" name="start-date" aria-describedby="startDateHelp">
-                  <small id="startDateHelp" class="form-text text-muted">Enter your starting date in the form of DD.MM.YYYY.</small>
+      <form action="/search-availability" method="post" novalidate class="needs-validation">
+        <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+        <div class="row">
+            <div class="col">
+                <div class="row" id="reservation-dates">
+                    <div class="col-md-6">
+                        <input required class="form-control" type="date" name="start" placeholder="Arrival">
+                    </div>
+                    <div class="col-md-6">
+                        <input required class="form-control" type="date" name="end" placeholder="Departure">
+                    </div>
                 </div>
-              </div>
-              
-              <div class="col">
-                <div class="mb-3">
-                  <label for="end-date>" class="form-label">Ending Date</label>
-                  <input required type="date" class="form-control" id="end-date" name="end-date" aria-describedby="endDateHelp">
-                  <small id="endDateHelp" class="form-text text-muted">Enter your ending date in the form of DD.MM.YYYY.</small>
-                </div>
-              </div>
-
             </div>
+        </div>
 
-            <hr>
+              <hr>
 
-            <button type="submit" class="btn btn-primary">Search Availability</button> 
+              <button type="submit" class="btn btn-primary">Search Availability</button> 
 
-          </form>
+            </form>
 
         </div>
       </div>
@@ -49,6 +41,10 @@
 
       <button  id="colorButton" class="btn btn-outline-secondary">Click</button>
 
-    </div>
+</div>
   
+{{end}}
+
+{{define "js"}}
+
 {{end}}
