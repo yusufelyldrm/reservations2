@@ -15,6 +15,7 @@ func Routes(app *config.AppConfig) http.Handler {
 	mux.Get("/", http.HandlerFunc(handlers.Repo.Home))
 	mux.Get("/about", http.HandlerFunc(handlers.Repo.About))*/
 
+	//mux is a router
 	mux := chi.NewRouter()
 
 	mux.Use(middleware.Recoverer)
@@ -27,7 +28,7 @@ func Routes(app *config.AppConfig) http.Handler {
 
 	mux.Get("/search-availability", handlers.Repo.Availability)
 	mux.Post("/search-availability", handlers.Repo.PostAvailability)
-	mux.Get("/search-availability-json", handlers.Repo.AvailabilityJSON)
+	mux.Post("/search-availability-json", handlers.Repo.AvailabilityJSON)
 
 	mux.Get("/generals-quarter", handlers.Repo.Generals)
 	mux.Get("/majors-suite", handlers.Repo.Majors)
@@ -35,8 +36,10 @@ func Routes(app *config.AppConfig) http.Handler {
 
 	mux.Get("/make-reservation", handlers.Repo.Reservation)
 
+	//static file server
 	fileServer := http.FileServer(http.Dir("./static"))
 
+	//mux.Handle is a chi method that takes a path and a handler
 	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
 
 	return mux

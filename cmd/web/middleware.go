@@ -17,8 +17,10 @@ func WriteToConsole(next http.Handler) http.Handler {
 
 // NoSurf adds CSRF protection to all POST requests
 func NoSurf(next http.Handler) http.Handler {
+	// create a CSRF handler
 	csrfHandler := nosurf.New(next)
 
+	// set CSRF cookie options
 	csrfHandler.SetBaseCookie(http.Cookie{
 		HttpOnly: true,
 		Path:     "/",

@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 
 	"github.com/justinas/nosurf"
-	"github.com/yusufelyldrm/bookings/pkg/config"
-	"github.com/yusufelyldrm/bookings/pkg/models"
+	"github.com/yusufelyldrm/bookings/internal/config"
+	"github.com/yusufelyldrm/bookings/internal/models"
 )
 
 // var functions = template.FuncMap{}
@@ -21,8 +21,14 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
+// AddDefaultData adds default data to the templateData struct and returns it back to the caller
+// function (RenderTemplate) as a pointer to the
+// struct (td) so that it can be used in the template file (base.layout.html) as
+// {{.CSRFToken}} and {{.Flash}} etc. (see base.layout.html) and {{.Data}}
 func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+
 	td.CSRFToken = nosurf.Token(r)
+
 	return td
 
 }
@@ -44,10 +50,13 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *mod
 		log.Fatal("could not get template from template cache")
 	}
 
+	//create a buffer to write to
 	buf := new(bytes.Buffer)
 
+	//add default data to template
 	td = AddDefaultData(td, r)
 
+	//execute the template
 	err := t.Execute(buf, td)
 	if err != nil {
 		log.Println(err)
@@ -72,35 +81,41 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *mod
 func CreateTemplateCache() (map[string]*template.Template, error) {
 	myCache := map[string]*template.Template{}
 
-	//get all the files named *.page.tpl from ./templates
+	//get all the files named *.page.tmpl from ./templates
 	pages, err := filepath.Glob("./templates/*.page.tmpl")
 
 	if err != nil {
 		return myCache, err
 	}
 
-	//range through all files ending with *.page.ptl
+	//range through all files ending with *.page.tmpl
 	for _, page := range pages {
 
+		//get the file name
 		name := filepath.Base(page)
+		//ParseFiles returns a *Template associated with the name
 		ts, err := template.New(name).ParseFiles(page)
 		if err != nil {
 			return myCache, err
 		}
 
+		//get all the files named *.layout.tmpl from ./templates
 		matches, err := filepath.Glob("./templates/*.layout.tmpl")
 		if err != nil {
 			return myCache, err
 		}
 
+		//range through all files ending with *.layout.tmpl
 		if len(matches) > 0 {
 			ts, err = ts.ParseGlob("./templates/*.layout.tmpl")
 			if err != nil {
 				return myCache, err
 			}
 		}
+		//add the template to the cache
 		myCache[name] = ts
 	}
+	//return the cache
 	return myCache, nil
 }
 

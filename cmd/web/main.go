@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/yusufelyldrm/bookings/pkg/config"
-	"github.com/yusufelyldrm/bookings/pkg/handlers"
-	"github.com/yusufelyldrm/bookings/pkg/render"
+	"github.com/yusufelyldrm/bookings/internal/config"
+	"github.com/yusufelyldrm/bookings/internal/handlers"
+	"github.com/yusufelyldrm/bookings/internal/render"
 )
 
 const portNumber = ":8080"
@@ -30,18 +30,24 @@ func main() {
 
 	app.Session = session
 
+	// create a template cache
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("cannot create template cache")
 	}
 
+	// assign the template cache to the app config
 	app.TemplateCache = tc
 
+	// assign the session to the app config
 	app.UseCache = false
 
+	// create a new repo
 	repo := handlers.NewRepo(&app)
+	// create a new handlers
 	handlers.NewHandlers(repo)
 
+	// create a new template set
 	render.NewTemplates(&app)
 
 	//http.HandleFunc("/", handlers.Repo.Home)
@@ -51,11 +57,13 @@ func main() {
 
 	//_ = http.ListenAndServe(portNumber, nil)
 
+	// create a new server
 	srv := &http.Server{
 		Addr:    portNumber,
 		Handler: Routes(&app),
 	}
 
+	// start the server
 	err = srv.ListenAndServe()
 	log.Fatal(err)
 }
