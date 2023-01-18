@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/yusufelyldrm/bookings/pkg/config"
-	"github.com/yusufelyldrm/bookings/pkg/models"
-	"github.com/yusufelyldrm/bookings/pkg/render"
+	"github.com/yusufelyldrm/reservaiton2/internal/config"
+	"github.com/yusufelyldrm/reservaiton2/internal/models"
+	"github.com/yusufelyldrm/reservaiton2/internal/render"
 )
 
 // Repo the repository used by the handlers
@@ -60,6 +60,11 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 // Reservation renders the make a reservation page and displays from
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{})
+}
+
+// PostReservation handles the posting of a reservation form
+func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
+
 }
 
 // Generals renders the room page
