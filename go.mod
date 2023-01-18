@@ -1,4 +1,4 @@
-module github.com/yusufelyldrm/reservaiton2
+module github.com/yusufelyldrm/reservations2
 
 go 1.19
 
