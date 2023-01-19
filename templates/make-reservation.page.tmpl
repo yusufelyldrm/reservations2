@@ -1,83 +1,39 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="static/css/styles.css">
-   
+{{template "base" .}}
 
-  </head>
-  <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
-   
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/ ">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/about">About</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="fa">
-                Rooms
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/generals-quarter">General' Quarters</a></li>
-                <li><a class="dropdown-item" href="/majors-suite">Major's Suit</a></li>
-              
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/make-reservation" tabindex="-1" aria-disabled="true" >Book now </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/contact" tabindex="-1" aria-disabled="true" >Contact </a>
-            </li>
-          </ul>
-        
-        </div>
-      </div>
-    </nav>
-
-  
+{{define "content"}}
     <div class="container">
 
       <div class="row">
         <div class="col">
           <h1>Make Reservation</h1>
+          <h2><strong> Reservation details </strong></h2>
 
           
-          <form method="post" action="" class="needs-validation" novalidate>
+          <form method="post" action="/make-reservation" class="" novalidate>
+            <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
 
-            <div  class="form-group mt-5">
-              <label for="first_name">First Name:</labelo>
-              <input type="text" name="first_name" id="first_name" class="form-control" required autocomplete="off">
+            <div  class="form-group">
+              {{with .Form.Errors.Get "first_name"}}
+                <label class="text-danger" >{{.}}</label>
+              {{end}}
+              <label for="first_name">First Name:</label>
+             <input class="form-control {{ with .Form.Errors.Get "first_name" }}{{.}} is_invalid {{end}}" type="text" name="first_name" id="first_name" autocomplete="off" required>
             </div>
 
             <div class="form-group">
               <label for="last_name">Last Name:</label>
-              <input type="text" name="last_name" id="last_name" class="form-control" required autocomplete="off">
+              <input class="form-control" type="text" name="last_name" id="last_name"   autocomplete="off" required>
             </div>
               
             <div class="form-group">
               <label for="email">Email:</label>
-              <input type="email" name="email" id="email" class="form-control" required autocomplete="off">
+              <input class="form-control" type="email" name="email" id="email" class="form-control" autocomplete="off" required>
             </div>
 
             <div class="form-group">
               <label for="phone">Phone Number:</label>
-              <input type="text" name="phone" id="phone" required class="form-control" autocomplete="off">
+              <input class="form-control" type="text" name="phone" id="phone" class="form-control" autocomplete="off" required>
             </div>           
 
             <hr>
@@ -87,17 +43,5 @@
 
         </div>
       </div>
-
     </div>
-
-
-    <div class="row my-footer">
-      <div class="col">Left</div>
-      <div class="col">Middle</div>
-      <div class="col">Right</div>
-    </div>
-
-
-
-  </body>
-</html>
+{{end}}

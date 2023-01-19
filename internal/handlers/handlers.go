@@ -6,9 +6,10 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/yusufelyldrm/reservaiton2/internal/config"
-	"github.com/yusufelyldrm/reservaiton2/internal/models"
-	"github.com/yusufelyldrm/reservaiton2/internal/render"
+	"github.com/yusufelyldrm/reservations2/internal/config"
+	"github.com/yusufelyldrm/reservations2/internal/forms"
+	"github.com/yusufelyldrm/reservations2/internal/models"
+	"github.com/yusufelyldrm/reservations2/internal/render"
 )
 
 // Repo the repository used by the handlers
@@ -59,11 +60,30 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 
 // Reservation renders the make a reservation page and displays from
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
+		Form: forms.New(nil),
+	})
+
 }
 
 // PostReservation handles the posting of a reservation form
 func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	// reservation := models.Reservation{
+	// 	FirstName: r.Form.Get("first_name"),
+	// 	LastName:  r.Form.Get("last_name"),
+	// 	Email:     r.Form.Get("email"),
+	// 	Phone:     r.Form.Get("phone"),
+	// }
+
+	form := forms.New(r.PostForm)
+
+	form.Has("first_name", r)
 
 }
 

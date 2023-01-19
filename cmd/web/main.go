@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/yusufelyldrm/reservaiton2/internal/config"
-	"github.com/yusufelyldrm/reservaiton2/internal/handlers"
-	"github.com/yusufelyldrm/reservaiton2/internal/render"
+	"github.com/yusufelyldrm/reservations2/internal/config"
+	"github.com/yusufelyldrm/reservations2/internal/handlers"
+	"github.com/yusufelyldrm/reservations2/internal/render"
 )
 
 const portNumber = ":8080"

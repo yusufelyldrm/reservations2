@@ -1,5 +1,7 @@
 package models
 
+import "github.com/yusufelyldrm/reservations2/internal/forms"
+
 // TemplateData holds data sent from handlers to templates
 type TemplateData struct {
 	StringMap map[string]string
@@ -10,5 +12,5 @@ type TemplateData struct {
 	Flash     string
 	Warning   string
 	Errors    string
-	Forms     *forms.Form
+	Form      *forms.Form
 }

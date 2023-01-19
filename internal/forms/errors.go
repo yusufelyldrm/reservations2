@@ -10,6 +10,7 @@ func (e errors) Add(field, message string) {
 
 // Get gets the first error message for a given field
 func (e errors) Get(field string) string {
+	// If there are no errors, return an empty string
 	es := e[field]
 	if len(es) == 0 {
 		return ""
