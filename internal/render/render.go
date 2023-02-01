@@ -26,11 +26,8 @@ func NewTemplates(a *config.AppConfig) {
 // struct (td) so that it can be used in the template file (base.layout.html) as
 // {{.CSRFToken}} and {{.Flash}} etc. (see base.layout.html) and {{.Data}}
 func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
-
 	td.CSRFToken = nosurf.Token(r)
-
 	return td
-
 }
 
 // RenderTemplate renders template using html/template
